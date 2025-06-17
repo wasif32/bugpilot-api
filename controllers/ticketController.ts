@@ -67,11 +67,13 @@ export const getTicketsByProject = async (req: AuthRequest, res: Response): Prom
     }
 
     const tickets = await Ticket.find({
+      project: new Types.ObjectId(projectId),
       $or: [
-        { createdBy: req.userId }, // Tickets created by the user
-        { assignees: req.userId }, // Tickets assigned to the user
+        { createdBy: new Types.ObjectId(req.userId) },
+        { assignees: new Types.ObjectId(req.userId) }
       ]
-     })
+    })
+      
       .populate('createdBy', 'name email')
       .populate('assignees', 'name email')
       .sort({ createdAt: -1 });
