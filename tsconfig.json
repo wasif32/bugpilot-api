@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",                  // Target modern JS
+    "module": "commonjs",                // For Node.js
+    "lib": ["es6"],                      // Basic JS features
+    "rootDir": "./",                     // Where TypeScript source files are located
+    "outDir": "./dist",                  // Where compiled JS files go
+    "esModuleInterop": true,             // Enables import compatibility with CommonJS
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,                      // Enables all strict type-checking options
+    "skipLibCheck": true                 // Skip checking type definitions of libs (faster build)
+  },
+  "include": ["**/*.ts"],                // Include all TS files
+  "exclude": ["node_modules", "dist"]    // Exclude dependencies and compiled output
+}
