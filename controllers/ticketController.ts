@@ -395,9 +395,9 @@ export const uploadScreenshotToTicket = async (req: AuthRequest, res: Response):
         return res.status(404).json({ message: 'Ticket not found.' });
       }
 
-       // --- CRUCIAL CHANGE HERE ---
-       const backendBaseUrl = process.env.BACKEND_URL || 'http://localhost:5000'; // Fallback for safety
-       const imageUrl = `${backendBaseUrl}/uploads/${req.file.filename}`; // Prepend backend URL
+ // Use Render's automatic external URL if available, otherwise fallback for local dev
+ const backendBaseUrl = process.env.RENDER_EXTERNAL_URL || `${req.protocol}://${req.get('host')}`;
+ const imageUrl = `${backendBaseUrl}/uploads/${req.file.filename}`; // This assumes /api is NOT part of the static route
 
       ticket.screenshots.push(imageUrl);
       await ticket.save();
